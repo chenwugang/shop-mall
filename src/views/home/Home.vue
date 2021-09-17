@@ -57,7 +57,10 @@ import NavBar from "components/common/navbar/NavBar.vue";
 import TabControl from "components/content/tabcontrol/TabControl.vue";
 import GoodList from "components/content/goodlist/GoodList.vue";
 import Scroll from "components/common/scroll/Scroll.vue";
-import ScrollTop from "components/content/scrolltop/ScrollTop.vue";
+
+
+// 导入混入的数据
+import { backTop } from "../../common/mixin"
 
 // 获取数据
 import { getHomeMultiData, getHomeGoodList } from "network/home.js";
@@ -103,11 +106,12 @@ export default {
     }
     // 记录原先滚动的位置
     // this.saveY = this.$refs.scroll.getScrollY()
-    console.log(this.PopsaveY)
-    console.log(this.NewSaveY)
-    console.log(this.SellSaveY)
-    console.log('------------------')
+    // console.log(this.PopsaveY)
+    // console.log(this.NewSaveY)
+    // console.log(this.SellSaveY)
+    // console.log('------------------')
   },
+  mixins: [backTop],
   data() {
     return {
       // 轮播图数据
@@ -124,12 +128,10 @@ export default {
       },
       // 控制区域当前点击的是谁
       currentTabControl: "pop",
-      // 是否显示返回顶部图标
-      isShowBackTop: false,
-      // 控制区域到顶部的距离
-      tabControlOffsetTop: null,
       // 开始是否显示顶部的tabControl
       isShow: false,
+      // 控制区域到顶部的距离
+      tabControlOffsetTop: null,
       //记录滚动的高度
       PopsaveY: 0,
       NewSaveY: 0,
@@ -178,16 +180,11 @@ export default {
       this.$refs.tabControl1.current = index
       this.$refs.tabControl2.current = index
     },
-    // 点击回到顶部
-    scrollTopClick() {
-      // 父组件拿子组件的对象的方法回到顶部
-      this.$refs.scroll.scrollTop(0, 0, 1000);
-    },
     // 控制显示和隐藏
     showBackTop(position) {
       // 回到顶部的显示和隐藏
       this.isShowBackTop = -position.y > 1000;
-      // 控制
+      // 第一个 taControl 的显示和隐藏
       this.isShow = -position.y > this.tabControlOffsetTop;
       // console.log(position.y)
       // console.log(this.tabControlOffsetTop)
@@ -212,7 +209,6 @@ export default {
     TabControl,
     GoodList,
     Scroll,
-    ScrollTop,
   },
 };
 </script>

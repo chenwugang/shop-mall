@@ -1,6 +1,6 @@
 <template>
   <div class="good-list-item">
-    <img :src="goodListItem.show.img" @click="imgClick" />
+    <img :src="imgShow" @click="imgClick" />
     <div>
       <p>{{ goodListItem.title }}</p>
       <div class="span-text">
@@ -25,6 +25,11 @@ export default {
   methods: {
     imgClick() {
       this.$router.push('/detail/' + this.goodListItem.iid)
+    }
+  },
+  computed: {
+    imgShow() {
+      return this.goodListItem.image || this.goodListItem.show.img
     }
   }
 };

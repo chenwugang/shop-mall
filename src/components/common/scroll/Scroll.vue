@@ -1,5 +1,5 @@
 <template>
-  <div class="wraper" ref="wraper">
+  <div class="wrapper" ref="wrapper">
     <div class="content">
       <slot></slot>
     </div>
@@ -14,6 +14,8 @@ import ObserveImage from "@better-scroll/observe-image";
 
 BScroll.use(Pullup);
 BScroll.use(ObserveDOM);
+BScroll.use(ObserveImage)
+
 export default {
   data() {
     return {
@@ -31,7 +33,7 @@ export default {
     },
   },
   mounted() {
-    this.scroll = new BScroll(this.$refs.wraper, {
+    this.scroll = new BScroll(this.$refs.wrapper, {
       probeType: this.probeType,
       // 上拉加载更多
       pullUpLoad: this.pullUpLoad,

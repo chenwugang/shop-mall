@@ -12,5 +12,7 @@ module.exports = {
             .set('views', resolve('./src/views'))
             .set('assets', resolve('./src/assets'))
             .set('network', resolve('./src/network'))
+            .set('font', resolve('./src/font'))
+            .set('common', resolve('./src/common'))
     }
 }
